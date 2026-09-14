@@ -162,60 +162,24 @@ const MylistPage = () => {
 
 
 const TogetherPage = () => {
-
-  const [visible, setVisible] = useState(
-    commonState.navActiveId == 'nav_together'
-  )
-
-  const component = useMemo(
-    ()=> <Together />,
-    []
-  )
-
-
-  useEffect(()=>{
-
-
-    const handleNavIdUpdate = (
-      id:CommonState['navActiveId']
-    )=>{
-
-      if(id == 'nav_together'){
-
-        requestAnimationFrame(()=>{
-
+  const [visible, setVisible] = useState(commonState.navActiveId == 'nav_together')
+  const component = useMemo(() => <Together />, [])
+  useEffect(() => {
+    const handleNavIdUpdate = (id: CommonState['navActiveId']) => {
+      if (id == 'nav_together') {
+        requestAnimationFrame(() => {
           setVisible(true)
-
         })
-
       }
-
     }
+    global.state_event.on('navActiveIdUpdated', handleNavIdUpdate)
 
-
-
-    global.state_event.on(
-      'navActiveIdUpdated',
-      handleNavIdUpdate
-    )
-
-
-    return ()=>{
-
-      global.state_event.off(
-        'navActiveIdUpdated',
-        handleNavIdUpdate
-      )
-
+    return () => {
+      global.state_event.off('navActiveIdUpdated', handleNavIdUpdate)
     }
-
-
-  },[])
-
-
+  }, [])
 
   return visible ? component : null
-
 }
 
 const SettingPage = () => {
@@ -238,6 +202,7 @@ const SettingPage = () => {
   return visible ? component : null
 }
 
+// 与 viewMap 及 PagerView 子元素顺序保持一致（index 即页面位置）
 const viewMap = {
   nav_search: 0,
   nav_songlist: 1,
@@ -251,13 +216,13 @@ const indexMap = [
   'nav_songlist',
   'nav_top',
   'nav_love',
-  'nav_together',
   'nav_setting',
+  'nav_together',
 ] as const
 
 const Main = () => {
   const pagerViewRef = useRef<ComponentRef<typeof PagerView>>(null)
-  let activeIndexRef = useRef(viewMap[commonState.navActiveId])
+  const activeIndexRef = useRef(viewMap[commonState.navActiveId])
   // const isScrollingRef = useRef(false)
   // const scrollPositionRef = useRef(-1)
 
@@ -353,7 +318,7 @@ const Main = () => {
       </View>
       <View collapsable={false} key="nav_together" style={styles.pageStyle}>
         <TogetherPage />
-      </View>      
+      </View>
       {/* <View collapsable={false} key="nav_search" style={styles.pageStyle}>
         <Search />
       </View>

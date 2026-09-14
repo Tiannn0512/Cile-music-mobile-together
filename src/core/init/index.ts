@@ -11,7 +11,6 @@ import { initDeeplink } from './deeplink'
 import { setApiSource } from '@/core/apiSource'
 import commonActions from '@/store/common/action'
 import settingState from '@/store/setting/state'
-import { checkUpdate } from '@/core/version'
 import { bootLog } from '@/utils/bootLog'
 import { cheatTip } from '@/utils/tools'
 
@@ -21,7 +20,7 @@ const handlePushedHomeScreen = async() => {
   if (settingState.setting['common.isAgreePact']) {
     if (isFirstPush) {
       isFirstPush = false
-      void checkUpdate()
+      // 已关闭启动时的版本更新检测（自用版本，不提示官方更新）
       void initDeeplink()
     }
   } else {
@@ -64,28 +63,13 @@ export default async() => {
   bootLog('Sync inited.')
 
   // 一起听初始化
-try {
-
-  const {
-    initTogether
-  } = await import('@/core/together')
-
-
-  initTogether()
-
-
-  bootLog('Together inited.')
-
-} catch(err) {
-
-
-  console.error(
-    'Together init failed:',
-    err
-  )
-
-
-}
+  try {
+    const { initTogether } = await import('@/core/together')
+    initTogether()
+    bootLog('Together inited.')
+  } catch (err) {
+    console.error('Together init failed:', err)
+  }
 
   // syncSetting()
 

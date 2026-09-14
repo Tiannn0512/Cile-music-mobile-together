@@ -13,6 +13,8 @@ import { exitApp, setNavActiveId } from '@/core/common'
 import Text from '@/components/common/Text'
 import { useSettingValue } from '@/store/setting/hook'
 
+import TogetherIcon from '@/components/common/TogetherIcon'
+
 const styles = createStyle({
   container: {
     flex: 1,
@@ -64,7 +66,7 @@ const Header = () => {
     <View style={{ paddingTop: statusBarHeight, backgroundColor: theme['c-primary-light-700-alpha-500'] }}>
       <View style={styles.header}>
         <Icon name="logo" color={theme['c-primary-dark-100-alpha-300']} size={28} />
-        <Text style={styles.headerText} size={28} color={theme['c-primary-dark-100-alpha-300']}>LX Music</Text>
+        <Text style={styles.headerText} size={24} color={theme['c-primary-dark-100-alpha-300']}>Cile Music</Text>
       </View>
     </View>
   )
@@ -81,16 +83,20 @@ const MenuItem = ({ id, icon, onPress }: {
   const activeId = useNavActiveId()
   const theme = useTheme()
 
+  const iconComponent = id == 'nav_together'
+    ? <TogetherIcon size={20} color={activeId == id ? theme['c-primary-font-active'] : theme['c-font-label']} />
+    : <Icon name={icon} size={20} color={activeId == id ? theme['c-primary-font-active'] : theme['c-font-label']} />
+
   return activeId == id
     ? <View style={styles.menuItem}>
         <View style={styles.iconContent}>
-          <Icon name={icon} size={20} color={theme['c-primary-font-active']} />
+          {iconComponent}
         </View>
         <Text style={styles.text} color={theme['c-primary-font']}>{t(id)}</Text>
       </View>
     : <TouchableOpacity style={styles.menuItem} onPress={() => { onPress(id) }}>
         <View style={styles.iconContent}>
-          <Icon name={icon} size={20} color={theme['c-font-label']} />
+          {iconComponent}
         </View>
         <Text style={styles.text}>{t(id)}</Text>
       </TouchableOpacity>

@@ -1,87 +1,25 @@
 let roomCode: string | null = null
 
-
+// 当前用户是否为房主
 let hostStatus = false
 
-
-
-
-
-export const setRoomCode = (
-
-  code:string
-
-)=>{
-
-
+export const setRoomCode = (code: string) => {
   roomCode = code
-
-
 }
 
-
-
-
-
-
-
-
-export const getRoomCode = ()=>{
-
-
+export const getRoomCode = () => {
   return roomCode
-
-
 }
 
-
-
-
-
-
-
-
-export const clearRoom = ()=>{
-
-
+export const clearRoom = () => {
   roomCode = null
-
-
   hostStatus = false
-
-
 }
 
-
-
-
-
-
-
-
-export const setHost = (
-
-  value:boolean
-
-)=>{
-
-
+export const setHost = (value: boolean) => {
   hostStatus = value
-
-
 }
 
-
-
-
-
-
-
-
-export const isHost = ()=>{
-
-
+export const isHost = () => {
   return hostStatus
-
-
 }

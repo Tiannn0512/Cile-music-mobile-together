@@ -1,7 +1,7 @@
 {
-  "name": "lx-music-mobile",
-  "version": "1.8.4",
-  "versionCode": 76,
+  "name": "cile-music-mobile",
+  "version": "2.0.0",
+  "versionCode": 77,
   "private": true,
   "scripts": {
     "dev": "react-native run-android --active-arch-only",
