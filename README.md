@@ -12,7 +12,6 @@
 - **跨端互通**：安卓端 ↔ 安卓端、安卓端 ↔ 桌面端（[桌面版仓库](https://github.com/Tiannn0512/lx-music-desktop-together)）都可以一起听
 - **进度对齐**：切歌后听客自动对齐房主当前进度（含加载耗时补偿）；播放中途加入房间也会先同步房主的完整播放状态
 - **智能换源兜底**：收到房主播放的歌曲后，若本机无法直接播放，会自动在同源精确重搜、跨源精确匹配之间降级尝试，绝不触发"出错自动跳歌"
-- **跟随主题**：一起听页面完全接入落雪音乐主题系统，跟随 App 主题变色
 
 ## 使用方法
 
@@ -25,7 +24,6 @@
 
 客户端默认连接官方演示服务器（Render 免费实例，冷启动约 20 秒）。你也可以自己搭：
 
-- 服务端代码在本仓库同级仓库 [together-server](https://github.com/Tiannn0512/together-server)，纯 Node.js + ws，无数据库
 - 本地运行：`npm install && npm start`（默认端口 3000，支持 `PORT` 环境变量）
 - 客户端改服务器地址：[`src/core/together/index.ts`](src/core/together/index.ts) 的 `SERVER_URL` 常量，改成你的 `wss://你的域名` 或 `ws://IP:端口`，重新打包即可
 
@@ -44,7 +42,6 @@ npm run pack:android   # 构建 release APK（输出在 android/app/build/output
 
 - `src/core/together/` — 一起听核心逻辑（WebSocket 连接、房间管理、消息协议、同步控制器、远程歌曲解析）
 - `src/screens/Home/Views/Together/` — 一起听页面 UI
-- `src/components/common/TogetherIcon.tsx` — 双人图标
 
 ## 许可
 
