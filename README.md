@@ -7,12 +7,12 @@
 > 原始项目 By 落雪无痕（LX Music），Cile Music 修改版 By Ci Le。遵循上游开源协议（Apache-2.0）。
 
 ## 一起听是什么
-零基础小白完全用AI来完成魔改的用来和对象一起听歌嘿嘿
 
 - **房主广播、听客跟随**：房主的切歌、播放、暂停、进度条拖动都会同步给房间内所有人
 - **跨端互通**：安卓端 ↔ 安卓端、安卓端 ↔ 桌面端（[桌面版仓库](https://github.com/Tiannn0512/lx-music-desktop-together)）都可以一起听
 - **进度对齐**：切歌后听客自动对齐房主当前进度（含加载耗时补偿）；播放中途加入房间也会先同步房主的完整播放状态
 - **智能换源兜底**：收到房主播放的歌曲后，若本机无法直接播放，会自动在同源精确重搜、跨源精确匹配之间降级尝试，绝不触发"出错自动跳歌"
+- **跟随主题**：一起听页面完全接入落雪音乐主题系统，跟随 App 主题变色
 
 ## 使用方法
 
@@ -21,12 +21,14 @@
 3. 另一端输入房间码点 **「加入房间」**
 4. 房主播放歌曲即可，所有人一起听 🎵
 
-## 自建服务器
+## 自建服务器（必须）
 
-客户端默认连接官方演示服务器（Render 免费实例，冷启动约 20 秒）。你也可以自己搭：
+**本项目不提供公共服务器**，使用一起听前需要先自建同步服务器（很简单，几分钟搞定）：
 
-- 本地运行：`npm install && npm start`（默认端口 3000，支持 `PORT` 环境变量）
-- 客户端改服务器地址：[`src/core/together/index.ts`](src/core/together/index.ts) 的 `SERVER_URL` 常量，改成你的 `wss://你的域名` 或 `ws://IP:端口`，重新打包即可
+1. 克隆服务器仓库 [`together-server`](https://github.com/Tiannn0512/together-server)，纯 Node.js + ws、无数据库、单文件
+2. 本地跑：`npm install && npm start`（默认 `ws://localhost:3000`，支持 `PORT` 环境变量）；或部署到 Render / Railway / VPS 等任何平台，建议套 HTTPS 变成 `wss://`
+3. 客户端填写地址：[`src/core/together/index.ts`](src/core/together/index.ts) 的 `SERVER_URL` 常量（当前为空），改成 `wss://你的域名` 或 `ws://IP:端口` 后重新打包
+4. 未配置服务器时，一起听页面会正常显示"未连接"，创建/加入房间会 toast 提示需要先配置
 
 ## 开发与打包
 
@@ -43,6 +45,7 @@ npm run pack:android   # 构建 release APK（输出在 android/app/build/output
 
 - `src/core/together/` — 一起听核心逻辑（WebSocket 连接、房间管理、消息协议、同步控制器、远程歌曲解析）
 - `src/screens/Home/Views/Together/` — 一起听页面 UI
+- `src/components/common/TogetherIcon.tsx` — 双人图标
 
 ## 许可
 

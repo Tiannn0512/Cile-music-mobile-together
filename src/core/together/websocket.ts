@@ -1,4 +1,5 @@
 import { setConnectionStatus } from './connection'
+import { toast } from '@/utils/tools'
 import type { TogetherMessage } from './types'
 
 type Receiver = (message: TogetherMessage) => void
@@ -113,10 +114,18 @@ export const registerWebSocketReceiver = (callback: Receiver) => {
 }
 
 export const createRoom = () => {
+  if (!serverUrl) {
+    toast('未配置一起听服务器，请自行部署后填写地址', 'long')
+    return
+  }
   sendWebSocketMessage({ type: 'createRoom' })
 }
 
 export const joinRoom = (roomCode: string) => {
+  if (!serverUrl) {
+    toast('未配置一起听服务器，请自行部署后填写地址', 'long')
+    return
+  }
   sendWebSocketMessage({ type: 'joinRoom', roomCode })
 }
 

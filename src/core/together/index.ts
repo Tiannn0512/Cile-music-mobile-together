@@ -33,8 +33,10 @@ import { toast } from '@/utils/tools'
 
 import type { TogetherMessage } from './types'
 
-// 一起听服务器地址
-const SERVER_URL = 'wss://together-server-sxyr.onrender.com'
+// 一起听服务器地址：本项目不提供公共服务器，需自建后填写。
+// 服务端代码见 together-server 仓库（纯 Node.js + ws，npm start 即可运行），
+// 部署后把地址填在这里，形如 'wss://你的域名' 或 'ws://IP:端口'，然后重新打包。
+const SERVER_URL = ''
 
 // 房主进度同步心跳间隔
 const PROGRESS_SYNC_INTERVAL = 2000
