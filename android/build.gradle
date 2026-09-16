@@ -1,6 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    // 阿里云镜像前置：国内网络直连稳定，避免 plugins.gradle.org / dl.google.com 的 TLS 握手抖动
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        google()
+        mavenCentral()
+    }
     ext {
         buildToolsVersion = "35.0.0"
         minSdkVersion = 21
@@ -15,6 +23,9 @@ buildscript {
         excludeAppGlideModule = true
     }
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         google()
         mavenCentral()
     }
