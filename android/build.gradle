@@ -37,3 +37,13 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+// 项目依赖仓库的阿里云镜像前置：RN 插件（DependencyUtils.configureRepositories）会为各项目
+// 追加 mavenCentral/google()/jitpack，其中 androidx 只在 google 仓库发布，
+// 国内直连 dl.google.com 不稳定，这里把镜像放在最前优先命中
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+    }
+}
