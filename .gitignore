@@ -67,3 +67,5 @@ buck-out/
 # testing
 /coverage
 *.keystore
+# 本地私有打包产物（内嵌自建服务器地址，禁止提交）
+private-apk/
